@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Navbar, HotelCard, Categories} from "../../components";
+import { Navbar, HotelCard, Categories,SearchStayWithDate} from "../../components";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useCategory } from "../../context";
+import { useCategory,useDate } from "../../context";
 import "./Home.css";
 
 export const Home = () => {
@@ -12,13 +12,13 @@ export const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(15);
   const [testData, setTestData] = useState([]);
   const { hotelCategory } = useCategory();
-//   const { isSearchModalOpen } = useDate();
+  const { isSearchModalOpen } = useDate();
   useEffect(() => {
     (async () => {
       try {
         const {data} = await axios.get(`https://travelstay.cyclic.app/api/hotels?category=${hotelCategory}`);
         setTestData(data);
-        setHotels(data ? data.slice(0,15) : []);
+        setHotels(data ? data.slice(0,16) : []);
       } catch (err) {
         console.log(err);
       }
@@ -36,7 +36,7 @@ export const Home = () => {
         setHotels(
           hotels.concat(testData.slice(currentIndex, currentIndex + 16))
         );
-        setCurrentIndex((prev) => prev + 15);
+        setCurrentIndex((prev) => prev + 16);
       } else {
         setHotels([]);
       }
@@ -87,6 +87,7 @@ export const Home = () => {
               ))}
           </main>
         </InfiniteScroll>) : <></>}
+        {isSearchModalOpen && <SearchStayWithDate />}
     </div>
   );
 };

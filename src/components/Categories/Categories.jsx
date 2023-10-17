@@ -34,11 +34,10 @@ export const Categories = () => {
     setHotelCategory(category);
   };
 
-  console.log(hotelCategory)
 
   return (
     <section className="categories d-flex gap">
-        <Carousel className="carousel" itemsToShow={9} itemsToScroll={6} pagination={false}>
+      <Carousel className="carousel" itemsToShow={9} itemsToScroll={6} pagination={false}>
         {
           categories && categories.map(({ _id, category }) => <span key={_id} className={`${category === hotelCategory ? "category-color" : ""} item`} onClick={() => handleCategoryClick(category)}>{category}</span>)
         }

@@ -1,4 +1,4 @@
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./HotelCard.css";
 //import { useWishlist, useAuth, useAlert } from "../../context";
 //import { findHotelInWishlist } from "../../utils";
@@ -14,11 +14,11 @@ export const HotelCard = ({hotel}) => {
 
 //   const isHotelInWishlist = findHotelInWishlist(wishlist, _id);
 
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-//   const handleHotelCardClick = () => {
-//     navigate(`/hotels/${name}/${address}-${state}/${_id}/reserve`);
-//   };
+  const handleHotelCardClick = () => {
+    navigate(`/hotels/${name}/${address}-${state}/${_id}/reserve`);
+  };
 
 //   const handleWishlistClick = () => {
 //     if (accessToken) {
@@ -52,7 +52,7 @@ export const HotelCard = ({hotel}) => {
 
   return (
     <div className="relative hotelcard-container shadow cursor-pointer">
-      <div >
+      <div onClick={handleHotelCardClick}>
         <img className="img" src={image} alt={name} />
         <div className="hotelcard-details">
           <div className="d-flex align-center">
