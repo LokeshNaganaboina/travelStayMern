@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useCategory } from "../../context";
+import { useCategory,useFilter } from "../../context";
 import Carousel from 'react-elastic-carousel';
 import "./Categories.css";
 
@@ -8,13 +8,13 @@ export const Categories = () => {
   const [categories, setCategories] = useState([]);
   const { hotelCategory, setHotelCategory } = useCategory();
 
-  // const { filterDispatch } = useFilter();
+  const { filterDispatch } = useFilter();
 
-  // const handleFilterClick = () => {
-  //   filterDispatch({
-  //     type: "SHOW_FILTER_MODAL",
-  //   });
-  // };
+  const handleFilterClick = () => {
+    filterDispatch({
+      type: "SHOW_FILTER_MODAL",
+    });
+  };
 
   useEffect(() => {
     (async () => {
@@ -43,7 +43,7 @@ export const Categories = () => {
         }
         </Carousel>
       <div>
-        <button className="button btn-filter d-flex align-center gap-small cursor-pointer">
+        <button className="button btn-filter d-flex align-center gap-small cursor-pointer"  onClick={handleFilterClick}>
           <span className="material-icons-outlined">filter_alt</span>
           <span>Filter</span>
         </button>

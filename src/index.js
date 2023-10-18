@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { CategoryProvider,DateProvider } from './context';
+import { CategoryProvider,DateProvider, FilterProvider, AuthProvider, AlertProvider} from './context';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -10,7 +10,13 @@ root.render(
     <Router>
       <CategoryProvider> 
         <DateProvider>
-          <App />
+          <FilterProvider> 
+            <AuthProvider>
+              <AlertProvider>
+                <App />
+              </AlertProvider>
+            </AuthProvider>
+          </FilterProvider>
         </DateProvider>
       </CategoryProvider>
     </Router>

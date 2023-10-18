@@ -1,12 +1,12 @@
 import "./Navbar.css";
-import { useDate } from "../../context";
+import { useDate, useAuth } from "../../context";
 import { Link } from "react-router-dom";
 
 export const Navbar = ({route}) => {
   const { destination, dateDispatch, checkInDate, checkOutDate, guests } =
     useDate();
 
-  //const { authDispatch, accessToken } = useAuth();
+  const { authDispatch, accessToken } = useAuth();
 
   const handleSearchClick = () => {
     dateDispatch({
@@ -14,18 +14,18 @@ export const Navbar = ({route}) => {
     });
   };
 
-  // const handleAuthClick = () => {
-  //   if (accessToken) {
-  //     authDispatch({
-  //       type: "SHOW_DROP_DOWN_OPTIONS"
-  //     })
-  //   } else {
-  //     authDispatch({
-  //       type: "SHOW_AUTH_MODAL",
-  //     });
-  //   }
+  const handleAuthClick = () => {
+    if (accessToken) {
+      authDispatch({
+        type: "SHOW_DROP_DOWN_OPTIONS"
+      })
+    } else {
+      authDispatch({
+        type: "SHOW_AUTH_MODAL",
+      });
+    }
 
-  // };
+  };
 
   return (
     <header className="heading d-flex align-center">
@@ -60,7 +60,7 @@ export const Navbar = ({route}) => {
       </div>
       }
       
-      <nav className="d-flex align-center gap-large" >
+      <nav className="d-flex align-center gap-large" onClick={handleAuthClick}>
         <div className="nav d-flex align-center cursor-pointer">
           <span className="material-icons-outlined profile-option menu">
             menu

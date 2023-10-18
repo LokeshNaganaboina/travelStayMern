@@ -22,7 +22,7 @@ export const SingleHotel = () => {
   const [singleHotel, setSingleHotel] = useState({});
 
   // const { isAuthModalOpen, isDropDownModalOpen } = useAuth();
-  // const { isSearchModalOpen } = useDate();
+  //const { isSearchModalOpen } = useDate();
   // const { alert } = useAlert();
 
   useEffect(() => {

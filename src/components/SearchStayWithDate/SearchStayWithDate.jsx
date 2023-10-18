@@ -19,7 +19,6 @@ export const SearchStayWithDate = () => {
           `https://travelstay.cyclic.app/api/hotels?category=${hotelCategory}`
         );
         setHotels(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
