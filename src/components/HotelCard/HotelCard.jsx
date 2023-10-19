@@ -1,18 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import "./HotelCard.css";
-//import { useWishlist, useAuth, useAlert } from "../../context";
-//import { findHotelInWishlist } from "../../utils";
+import { useWishlist, useAuth, useAlert } from "../../context";
+import { findHotelInWishlist } from "../../utils";
 
 export const HotelCard = ({hotel}) => {
      const { _id, name, image, address, state, rating, price } = hotel;
 
-//   const { wishlistDispatch, wishlist } = useWishlist();
+  const { wishlistDispatch, wishlist } = useWishlist();
 
-//   const { accessToken, authDispatch } = useAuth();
+  const { accessToken, authDispatch } = useAuth();
 
-//   const { setAlert } = useAlert();
+  const { setAlert } = useAlert();
 
-//   const isHotelInWishlist = findHotelInWishlist(wishlist, _id);
+  const isHotelInWishlist = findHotelInWishlist(wishlist, _id);
 
   const navigate = useNavigate();
 
@@ -20,35 +20,36 @@ export const HotelCard = ({hotel}) => {
     navigate(`/hotels/${name}/${address}-${state}/${_id}/reserve`);
   };
 
-//   const handleWishlistClick = () => {
-//     if (accessToken) {
-//       if (!isHotelInWishlist) {
-//         wishlistDispatch({
-//           type: "ADD_TO_WISHLIST",
-//           payload: hotel,
-//         });
-//         setAlert({
-//           open: true,
-//           message: `Hotel:: ${name} added to wishlist`,
-//           type: "success"
-//         })
-//       } else {
-//         wishlistDispatch({
-//           type: "REMOVE_FROM_WISHLIST",
-//           payload: _id,
-//         });
-//         setAlert({
-//           open: true,
-//           message: `Hotel:: ${name} removed from wishlist`,
-//           type: "success"
-//         })
-//       }
-//     } else {
-//       authDispatch({
-//         type: "SHOW_AUTH_MODAL",
-//       });
-//     }
-//   };
+  const handleWishlistClick = () => {
+    if (accessToken) {
+      if (!isHotelInWishlist) {
+        wishlistDispatch({
+          type: "ADD_TO_WISHLIST",
+          payload: hotel,
+        });
+        navigate('/wishlists')
+        setAlert({
+          open: true,
+          message: `Hotel:: ${name} added to wishlist`,
+          type: "success"
+        })
+      } else {
+        wishlistDispatch({
+          type: "REMOVE_FROM_WISHLIST",
+          payload: _id,
+        });
+        setAlert({
+          open: true,
+          message: `Hotel:: ${name} removed from wishlist`,
+          type: "success"
+        })
+      }
+    } else {
+      authDispatch({
+        type: "SHOW_AUTH_MODAL",
+      });
+    }
+  };
 
   return (
     <div className="relative hotelcard-container shadow cursor-pointer">
@@ -71,10 +72,10 @@ export const HotelCard = ({hotel}) => {
           </p>
         </div>
       </div>
-      <button className="button btn-wishlist absolute d-flex align-center">
-        <span className="material-icons favorite cursor">
+      <button className="button btn-wishlist absolute d-flex align-center" onClick={handleWishlistClick}>
+      <span className={`material-icons favorite cursor ${isHotelInWishlist ? "fav-selected" : ""}`}>
           favorite
-        </span>
+      </span>
       </button>
     </div>
   );
