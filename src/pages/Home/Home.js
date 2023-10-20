@@ -7,10 +7,12 @@ import {
   Categories,
   SearchStayWithDate,
   Filter,
-  AuthModal
+  AuthModal,
+  ProfileDropDown,
+  Alert
 } from "../../components";
 import "./Home.css";
-import { useCategory, useDate, useFilter, useAuth} from "../../context";
+import { useCategory, useDate, useFilter, useAuth, useAlert } from "../../context";
 import {
   getHotelsByPrice,
   getHotelsByRoomsAndBeds,
@@ -38,7 +40,7 @@ export const Home = () => {
   } = useFilter();
 
   const { isAuthModalOpen, isDropDownModalOpen } = useAuth();
-  // const { alert } = useAlert();
+  const { alert } = useAlert();
 
   useEffect(() => {
     (async () => {
@@ -110,27 +112,25 @@ export const Home = () => {
           endMessage={<p className="alert-text">You have seen it all</p>}
         >
           <main className="main d-flex align-center wrap gap-larger">
-
           {filteredHotelsByCancelation &&
               filteredHotelsByCancelation.map((hotel) => (
                 <HotelCard key={hotel._id} hotel={hotel} />
               ))}
-              
-          {hotels &&
+            
+            {hotels &&
               hotels.map((hotel) => (
                 <HotelCard key={hotel._id} hotel={hotel} />
-              ))} 
-            
-            
+              ))}
           </main>
         </InfiniteScroll>
       ) : (
         <></>
       )}
+      {isDropDownModalOpen && <ProfileDropDown />}
       {isSearchModalOpen && <SearchStayWithDate />}
       {isFilterModalOpen && <Filter />}
       {isAuthModalOpen && <AuthModal />}
-      {/*alert.open && <Alert />} */}
+      {alert.open && <Alert />}
     </div>
   );
 };

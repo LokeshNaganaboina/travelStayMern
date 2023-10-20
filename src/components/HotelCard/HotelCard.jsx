@@ -27,7 +27,6 @@ export const HotelCard = ({hotel}) => {
           type: "ADD_TO_WISHLIST",
           payload: hotel,
         });
-        navigate('/wishlists')
         setAlert({
           open: true,
           message: `Hotel:: ${name} added to wishlist`,

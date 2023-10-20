@@ -59,8 +59,8 @@ export const AuthLogin = () => {
 
   const handleTestCredentialsClick = async () => {
     const { accessToken, username } = await loginHandler(
-      7878787878,
-      "Abcd@1234",
+      8647654331,
+      "Loke@2001",
       setAlert
     );
     authDispatch({

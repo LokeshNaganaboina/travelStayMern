@@ -1,5 +1,5 @@
 import "./FinalPrice.css";
-import { useDate} from "../../context";
+import { useDate, useAuth, useAlert } from "../../context";
 import { DateSelector } from "../DateSelector/DateSelector";
 import { useNavigate } from "react-router-dom";
 
@@ -10,9 +10,9 @@ export const FinalPrice = ({ singleHotel }) => {
 
   const { guests, dateDispatch, checkInDate, checkOutDate } = useDate();
 
-  //const { setAlert } = useAlert();
+  const { setAlert } = useAlert();
 
-  //const { accessToken, authDispatch } = useAuth();
+  const { accessToken, authDispatch } = useAuth();
 
   const handleGuestChange = (event) => { 
     dateDispatch({
@@ -21,33 +21,33 @@ export const FinalPrice = ({ singleHotel }) => {
     });
   };
 
-  // const handleReserveClick = () => {
-  //   if (!checkInDate) {
-  //     setAlert({
-  //       open: true,
-  //       message: "Select a Check-in Date",
-  //       type: "info"
-  //     })
-  //   } else if (!checkOutDate) {
-  //     setAlert({
-  //       open: true,
-  //       message: "Select a Check-out Date",
-  //       type: "info"
-  //     })
-  //   } else if (guests < 1) {
-  //     setAlert({
-  //       open: true,
-  //       message: "Add number of guests",
-  //       type: "info"
-  //     })
-  //   } else if (accessToken) {
-  //     navigate(`/confirm-booking/stay/${_id}`);
-  //   } else {
-  //     authDispatch({
-  //       type: "SHOW_AUTH_MODAL"
-  //     })
-  //   }
-  // };
+  const handleReserveClick = () => {
+    if (!checkInDate) {
+      setAlert({
+        open: true,
+        message: "Select a Check-in Date",
+        type: "info"
+      })
+    } else if (!checkOutDate) {
+      setAlert({
+        open: true,
+        message: "Select a Check-out Date",
+        type: "info"
+      })
+    } else if (guests < 1) {
+      setAlert({
+        open: true,
+        message: "Add number of guests",
+        type: "info"
+      })
+    } else if (accessToken) {
+      navigate(`/confirm-booking/stay/${_id}`);
+    } else {
+      authDispatch({
+        type: "SHOW_AUTH_MODAL"
+      })
+    }
+  };
 
   return (
     <div className="price-details-container d-flex direction-column gap shadow">
@@ -89,6 +89,7 @@ export const FinalPrice = ({ singleHotel }) => {
       <div>
         <button
           className="button btn-reserve btn-primary cursor"
+          onClick={handleReserveClick}
         >
           Reserve
         </button>

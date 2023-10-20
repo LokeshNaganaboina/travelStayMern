@@ -56,7 +56,7 @@ export const Navbar = ({route}) => {
         <span className="form-option">
           {route !== "home" && guests > 0 ? `${guests} guests` : "Add Guests"}
         </span>
-        <span class="search material-icons-outlined">search</span>
+        <span className="search material-icons-outlined">search</span>
       </div>
       }
       

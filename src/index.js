@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { CategoryProvider,DateProvider, FilterProvider, AuthProvider, AlertProvider,WishlistProvider} from './context';
+import { CategoryProvider,DateProvider, FilterProvider, AuthProvider, AlertProvider,WishlistProvider, HotelProvider} from './context';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,7 +14,9 @@ root.render(
             <AuthProvider>
               <AlertProvider>
                 <WishlistProvider>
-                  <App />
+                  <HotelProvider>
+                    <App />
+                  </HotelProvider>
                 </WishlistProvider>
               </AlertProvider>
             </AuthProvider>

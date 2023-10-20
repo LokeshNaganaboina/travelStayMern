@@ -34,7 +34,6 @@ export const SingleHotel = () => {
           `https://travelstay.cyclic.app/api/hotels/${id}`
         );
         setSingleHotel(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
